@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Based</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/sakura.css/css/sakura.css"
+      type="text/css"
+    />
+  </head>
+  <body>
+    <main>
+      <h1>Base 64 Instant converter</h1>
+      <form action="">
+        <section style="padding-bottom: 1.5rem">
+          <label for="">Base64</label>
+          <textarea
+            name="base64"
+            id="base64"
+            cols="30"
+            rows="10"
+            oninput="onInputBase64()"
+          ></textarea>
+          <button type="button" onclick="copyBase64()">Copy</button>
+          <button type="button" onclick="pasteBase64()">Paste</button>
+        </section>
+        <section>
+          <label for="">Message</label>
+          <textarea
+            name="message"
+            id="message"
+            cols="30"
+            rows="10"
+            oninput="onInputMessage()"
+          ></textarea>
+          <button type="button" onclick="copyMessage()">Copy</button>
+          <button type="button" onclick="pasteMessage()">Paste</button>
+        </section>
+      </form>
+    </main>
+  </body>
+  <script>
+    function onInputBase64() {
+      console.log(document.getElementById("base64").value + "");
+
+      document.getElementById("message").value = atob(
+        document.getElementById("base64").value + ""
+      );
+    }
+
+    function onInputMessage() {
+      document.getElementById("base64").value = btoa(
+        document.getElementById("message").value + ""
+      );
+    }
+
+    function copyBase64() {
+      const value = document.getElementById("base64").value;
+      navigator.clipboard.writeText(value);
+    }
+
+    function pasteBase64() {
+      navigator.clipboard
+        .readText()
+        .then((text) => (document.getElementById("base64").value = text));
+    }
+
+    function copyMessage() {
+      const value = document.getElementById("message").value;
+      navigator.clipboard.writeText(value);
+    }
+
+    function pasteMessage() {
+      navigator.clipboard
+        .readText()
+        .then((text) => (document.getElementById("message").value = text));
+    }
+  </script>
+</html>
